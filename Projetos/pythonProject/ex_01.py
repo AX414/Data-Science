@@ -1,34 +1,36 @@
-# mostra o hello world
-#print("Hello World!");
+#mostra o hello world
+print("\nHello World!");
 
-#mostra na tela o resultado da soma de 30 + 50
-#soma = 30+50;
-#print(soma);
-
-#carrega o conjunto de dados do kc_house_data.csv
-#do HD para a memória
+#mostra na tela o ds da soma de 30 + 50
+soma = 30+50;
+print('\nResultado da soma: ', soma);
 #--------------------------------------------------
+
 
 #biblioteca - pandas (tem que instalar)
 #função - read_csv()
 
+#carrega o conjunto de dados do kc_house_data.csv
+#do HD para a memória
 import pandas as pd
-resultado = pd.read_csv('datasets/kc_house_data.csv');
+ds = pd.read_csv('datasets/kc_house_data.csv');
 
-#mostra as 5 primeiras linhas + o cabeçalho
-#print(resultado.head());
+#head: mostra as 5 primeiras linhas
+print('\nMostrar as 5 primeiras linhas:\n', ds.head());
 
-#mostra o número de colunas e linhas do conjunto de dados - função shape
-#print(resultado.shape);
+#shape: mostra o número de colunas e linhas do conjunto de dados
+print('\nMostra o número de colunas e linhas do conjunto de dados:\n',ds.shape);
 
-#mostra na tela o nome das colunas do conjunto de dados
-#print(resultado.columns);
+#columns: mostra na tela o nome das colunas do conjunto de dados
+print('\nMostra na tela o nome das colunas do conjunto de dados:\n', ds.columns);
 
-#mostrar na tela o conjunto de dados ordenados pela coluna price
-#print(resultado.sort_values('price'));
+#sort_values: mostrar na tela o conjunto de dados ordenados pela coluna price
+print('\nMostrar na tela o conjunto de dados ordenados pela coluna price:\n', ds.sort_values('price'));
 
 #mostrar na tela o conjunto de dados ordenados pela coluna price apresentando ela e o id
-#print(resultado[['id','price']].sort_values('price'));
+print('\nMostrar na tela o conjunto de dados ordenados pela coluna price apresentando ela e o id: \n',
+      ds[['id','price']].sort_values('price'));
 
 #mostrar na tela o conjunto de dados ordenados pela coluna price na ordem decrescente, apresentando ela e o id
-print(resultado[['id','price']].sort_values('price',ascending = False));
+print('\nMostrar na tela o conjunto de dados ordenados pela coluna price na ordem decrescente, apresentando ela e o id: \n',
+      ds[['id','price']].sort_values('price',ascending = False));

@@ -68,7 +68,6 @@ aux = (ds['floors'].head().where(ds['floors'] > 2));
 maisDeDoisAndares = aux.count();
 print('\n(OBS) 12-quantas casas tem mais de 2 andares dos 5 primeiros registros?\n R = ', maisDeDoisAndares);
 
-
 #13-quantas casas tem vista para o mar?
 aux = (ds['waterfront'].where(ds['waterfront'] > 0));
 qtdVistaMar = aux.count();
