@@ -1,5 +1,4 @@
 import pandas as pd;
-from pandas._libs.lib import maybe_indices_to_slice
 
 ds = pd.read_csv('datasets/kc_house_data.csv');
 
