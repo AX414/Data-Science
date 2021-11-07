@@ -1,3 +1,4 @@
+#instalar via terminal com o pip: pip install pandas
 import pandas as pd;
 
 ds = pd.read_csv('datasets/kc_house_data.csv');
@@ -54,18 +55,18 @@ print('\n(Versão com apenas o valor) 10-Qual o preço mínimo entre as casas co
 #11-quantas casas possuem mais de 300 metros quadrados?
 totalSqft = sum(ds['sqft_living']>300);
 pegaCasa = ds.loc[ds['sqft_living'].where(ds['sqft_living']<=300).idxmin()];
-print('\n11-quantas casas possuem mais de 300 metros quadrados?\n R = ', totalSqft);
+print('\n11-Quantas casas possuem mais de 300 metros quadrados?\n R = ', totalSqft);
 print('\n(OBS) Qual a casa com metro quadrado < 300? \nR = ID: %s | Metro Quadrado: %.2f | Preço: %.2f'
       % (pegaCasa['id'],pegaCasa['sqft_living'],pegaCasa['price']));
 
 #12-quantas casas tem mais de 2 andares?
 aux = (ds['floors'].where(ds['floors'] > 2));
 maisDeDoisAndares = aux.count();
-print('\n12-quantas casas tem mais de 2 andares?\n R = ', maisDeDoisAndares);
+print('\n12-Quantas casas tem mais de 2 andares?\n R = ', maisDeDoisAndares);
 
 aux = (ds['floors'].head().where(ds['floors'] > 2));
 maisDeDoisAndares = aux.count();
-print('\n(OBS) 12-quantas casas tem mais de 2 andares dos 5 primeiros registros?\n R = ', maisDeDoisAndares);
+print('\n(OBS) Quantas casas tem mais de 2 andares dos 5 primeiros registros?\n R = ', maisDeDoisAndares);
 
 #13-quantas casas tem vista para o mar?
 aux = (ds['waterfront'].where(ds['waterfront'] > 0));

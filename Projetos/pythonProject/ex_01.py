@@ -12,6 +12,8 @@ print('\nResultado da soma: ', soma);
 
 #carrega o conjunto de dados do kc_house_data.csv
 #do HD para a memória
+
+#instalar via terminal com o pip: pip install pandas
 import pandas as pd
 ds = pd.read_csv('datasets/kc_house_data.csv');
 
