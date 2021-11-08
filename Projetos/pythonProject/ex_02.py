@@ -142,7 +142,7 @@ print('\nDados do mapa: \n',ds_mapa);
 
 mapa = px.scatter_mapbox(ds_mapa,lat = 'lat' , lon = 'long', hover_name = 'id',
                 hover_data = ['price'],
-                color_discrete_sequence = ['fuchsia'],
+                color_discrete_sequence = ['blue'],
                 zoom = 3,
                 height = 300
                 )
@@ -154,7 +154,6 @@ mapa.update_layout(height = 600,
                    margin = {'r':0, 't':0, 'l':0, 'b':0}
 );
 
-#O mapa abre no navegador
-mapa.show();
-mapa.write_html('datasets/mapa_kc_house_data.html');
+#O mapa abre no navegador a partir do documento criado
+mapa.write_html('datasets/mapa_kc_house_data.html',auto_open=True);
 

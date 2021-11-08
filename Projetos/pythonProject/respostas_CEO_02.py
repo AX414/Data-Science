@@ -1,5 +1,4 @@
 import pandas as pd;
-import plotly as px;
 
 ds = pd.read_csv('datasets/kc_house_data.csv');
 
@@ -94,24 +93,92 @@ aux = (ds['id'].where((good) & (new)));
 qtdGoodNew= aux.count();
 print('\n13-Quantos imoveis estao com a condicao igual a “good” e sao “new_house”?\n R = ', qtdGoodNew);
 
-
 # 14. Qual o valor do imovel mais caro do tipo “studio”?
-#imovelMaisCaro = ds.sort_values('price', ascending = False).where(ds['dormitory_type'].__eq__('studio'));
-#print('\n14-Qual o valor do imovel mais caro do tipo “studio”?\n R = \n\n', imovelMaisCaro);
-
+condicao = ds['dormitory_type'].__eq__('studio');
+maisCara = ds.loc[ds['price'].where(condicao).idxmax()];
+print('\n14-Qual o valor do imovel mais caro do tipo “studio”?\n R = ID: %s | Preço: %s'
+      % (maisCara['id'],maisCara['price']));
 
 # 15. Quantos imoveis do tipo “apartment” foram reformados em 2015?
+from datetime import time;
+
+data1 = ds['yr_renovated'];
+data2 = 2015;
+data2 = pd.to_datetime(data2);
+
+condicao1 = data1 == data2;
+condicao2 = ds['dormitory_type'].__eq__('apartment');
+
+aux = (ds['yr_renovated'].where((condicao1) & (condicao2)));
+qtdRenovados = aux.count();
+print('\n15-Quantos imoveis do tipo “apartment” foram reformados em 2015?\n R = ', qtdRenovados);
+
 
 # 16. Qual o maior numero de quartos que um imovel do tipo “house” possui?
 
+condicao = ds['dormitory_type'].__eq__('house');
+aux = ds['bedrooms'].where(condicao);
+qtdMaiorNumeroQuartos = max(aux);
+print('\n16-Qual o maior numero de quartos que um imovel do tipo “house” possui?\n R = ', qtdMaiorNumeroQuartos);
+
 # 17. Quantos imoveis “new_house” foram reformados no ano de 2014?
+data1 = ds['yr_renovated'];
+data2 = 2014;
+data2 = pd.to_datetime(data2);
+
+condicao1 = data1 == data2;
+condicao2= ds['house_age'].__eq__('new_house');
+
+aux = (ds['house_age'].where((condicao1) & (condicao2)));
+qtdNovaRenovados = aux.count();
+print('\n17-Quantos imoveis “new_house” foram reformados no ano de 2014?\n R = ', qtdNovaRenovados);
 
 # 18. Selecione as colunas: “id”, “date”, “price”, “floors”, “zipcode” pelo metodo:
 # 	18.1 – Direto pelo nome das colunas
+print('\n18.1–Direto pelo nome das colunas:\n',ds[['id','date','price','floors','zipcode']]);
 # 	18.2 – Pelos indices
+print('\n18.2–Pelos indices:\n',ds.iloc[0:10,0:21]);
 # 	18.3 – Pelos indices das linhas e o nome das colunas
+print('\n18.3–Pelos indices das linhas e o nome das colunas:\n',ds.loc[0:10,['id','date','price','floors','zipcode']]);
 # 	18.4 – Indices booleanos
+colunas = [True, True, True, False, False, False,
+       False, True, False, False, False, False,
+       False, False, False, False, True,
+       False, False, False, False, False];
+
+#print(ds.columns);
+print('\n18.4–Indices booleanos:\n',ds.loc[0:10,colunas]);
 
 # 19. Salve um arquivo .csv com somente as colunas do item 18
+tamanho = len(ds['id']);
+relatorio = ds.loc[0:tamanho,['lat']];
+print('\n19-Relatório de Latitudes:\n',relatorio);
+relatorio.to_csv('datasets/relatorioLatitudes.csv',index = False);
 
 # 20. Modifique a cor dos pontos no mapa de “pink” para “verde-escuro”
+
+#instalar via terminal com o pip: pip install plotly
+import plotly.express as px;
+
+ds_mapa = ds[['id','lat','long','price']];
+print('\nDados do mapa de pontos verdes: \n',ds_mapa);
+
+mapa = px.scatter_mapbox(ds_mapa,lat = 'lat' , lon = 'long', hover_name = 'id',
+                hover_data = ['price'],
+                color_discrete_sequence = ['green'],
+                zoom = 3,
+                height = 300
+                )
+
+mapa.update_layout(mapbox_style = 'open-street-map');
+
+#margin ={right,top,left,bottom}
+mapa.update_layout(height = 600,
+                   margin = {'r':0, 't':0, 'l':0, 'b':0}
+);
+
+#O mapa abre no navegador, não coloquei o mapa.show() por estar tendo problemas
+#de conexão recusada no 127.0.0.1 pelo Opera GX, mas com o auto_open = True, ele
+#abrirá o mapa a partir do documento que é gerado no write_html, inclusive
+#mais rápido (e travou menos aqui também)
+mapa.write_html('datasets/mapa_pontos_verdes.html',auto_open=True);
