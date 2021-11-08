@@ -20,7 +20,7 @@ ds = pd.read_csv('datasets/kc_house_data.csv');
 # print('\n\n',ds[['id','bedrooms']].head(3));
 #
 # #int -> string
-# ds['bedrooms'] = ds['bedrooms'].astype(str);
+# ds['bedrooms'] = ds['bedrooms'].astype('string');
 # print('\nAtualizou bedrooms para string:\n',ds.dtypes);
 # print('\n\n',ds[['id','bedrooms']].head(3));
 #
@@ -156,3 +156,5 @@ mapa.update_layout(height = 600,
 
 #O mapa abre no navegador
 mapa.show();
+mapa.write_html('datasets/mapa_kc_house_data.html');
+
