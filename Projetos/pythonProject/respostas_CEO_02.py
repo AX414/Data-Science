@@ -45,7 +45,7 @@ print('\n3-Tipos de Condição:\n',ds[['id','condition','condition_type']]);
 
 
 # 4. Modifique o TIPO da coluna “condition” para STRING
-ds['condition_type'] = ds['condition_type'].astype('string');
+ds['condition'] = ds['condition'].astype('string');
 print('\n4-Modifique o TIPO da coluna “condition” para STRING:\n',ds.dtypes);
 
 # 5.Delete as colunas: “sqft_living15” e “sqft_lot15”
