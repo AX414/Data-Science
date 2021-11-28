@@ -6,7 +6,6 @@ soma = 30+50;
 print('\nResultado da soma: ', soma);
 #--------------------------------------------------
 
-
 #biblioteca - pandas (tem que instalar)
 #função - read_csv()
 
